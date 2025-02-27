@@ -1,15 +1,24 @@
 import express from "express";
+import mongoose from "mongoose";
+import Games from "./models/games.js";
 const app = express();
+
+// IMportando as rotas (endpoints) de Games
+import gameRoutes from "./routes/gameRoutes.js";
 
 // Configurando o express
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use("/", gameRoutes);
+
+// Iniciando a conexão om o banco de dados MongoDB
+mongoose.connect("mongodb://127.0.0.1:27017/api-the-games");
 
 // Rota principal
 app.get("/", (req, res) => {
   //   res.send("API iniciada com sucesso!");
-  const games =
-    [{
+  const games = [
+    {
       title: "Game 1",
       year: 2020,
       plataform: "PC",
@@ -20,7 +29,8 @@ app.get("/", (req, res) => {
       year: 2024,
       plataform: "PlayStation 5",
       price: 200,
-    }];
+    },
+  ];
   res.json(games);
 });
 
