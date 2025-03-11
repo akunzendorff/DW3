@@ -1,0 +1,22 @@
+fluxo da API
+1- Routes
+2- Controllers
+3- Services
+4- Models
+
+assync - await
+é uma forma moderna de trabalhar com promises
+
+Desestruturação - quando o nome é o mesmo e não precisa repetir. Exemplo:
+ao inves de usar: "title = title" se usa apenas: "title"
+outro exemplo de desestruturação
+o que antes era assim: 
+const title = req.body.title
+const plataform = req.body.title
+
+agora é:
+const { title, plataform, year, price } = req.body
+
+
+req - requisição
+res - resposta
