@@ -1,22 +1,23 @@
 import express from "express";
 import mongoose from "./config/db-connection.js";
 import Awards from "./models/awards.js";
+const app = express();
 
-const app = express;
+import awardRoutes from "./routes/awardRoutes.js"
 
-import awardRoutes from "./routes/awardRoutes.js";
-
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use("/", awardRoutes);
-
-mongoose.connect("mongodb://127.0.0.1:27017/api-oscar");
+app.use("/awards", awardRoutes);
 
 app.get("/", (req, res) => {
   const awards = [
     {
-      title: "Melhor Filme",
-      winner: "Ainda estou aqui",
+      title: "Melhor filme internacional",
+      winner: "Ainda estou aqui.",
+    },
+    {
+      title: "Melhor filme",
+      winner: "Anora",
     },
   ];
   res.json(awards);
