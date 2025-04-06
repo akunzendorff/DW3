@@ -13,14 +13,12 @@ const getAllAwards = async (req, res) => {
 
 const createAward = async (req, res) => {
   try {
-    const { title, winner } = req.body;
-
-    await awardService.Create(title, winner);
-
+    const { title, candidates, winner } = req.body; 
+    await awardService.Create(title, candidates, winner); 
     res.sendStatus(201);
   } catch (error) {
     console.log(error);
-    res.status(500).json({ error: "Erro interno no servidor" });
+    res.status(500).json({ error: "Erro interno no servidor. " });
   }
 };
 
@@ -29,9 +27,9 @@ const deleteAward = async (req, res) => {
     if (ObjectId.isValid(req.params.id)) {
       const id = req.params.id;
       awardService.Delete(id);
-      res.sendStatus(204);
+      res.sendStatus(204); 
     } else {
-      res.sendStatus(400);
+      res.sendStatus(400); 
     }
   } catch (error) {
     console.log(error);
@@ -39,4 +37,4 @@ const deleteAward = async (req, res) => {
   }
 };
 
-export default {getAllAwards, createAward, deleteAward}
+export default { getAllAwards, createAward, deleteAward };

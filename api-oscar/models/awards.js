@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const awardSchema = new mongoose.Schema({
   title: String,
+  candidates: Array,
   winner: String,
 });
 

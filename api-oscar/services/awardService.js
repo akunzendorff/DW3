@@ -4,15 +4,17 @@ class awardService {
   async getAll() {
     try {
       const awards = await Award.find();
+      return awards
     } catch (error) {
       console.log(error);
     }
   }
 
-  async Create(title, winner) {
+  async Create(title, candidates, winner) {
     try {
         const newAward = new Award({
             title,
+            candidates,
             winner
         })
 
