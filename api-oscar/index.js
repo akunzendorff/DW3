@@ -1,27 +1,19 @@
 import express from "express";
-import mongoose from "./config/db-connection.js";
-import Awards from "./models/awards.js";
-const app = express();
-
 import awardRoutes from "./routes/awardRoutes.js"
+import actorRoutes from "./routes/actorRoutes.js"
+import directorRoutes from "./routes/directorRoutes.js"
+import movieRoutes from "./routes/movieRoutes.js"
+
+import mongoose from './config/db-connection.js';
+
+const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use("/awards", awardRoutes);
-
-app.get("/", (req, res) => {
-  const awards = [
-    {
-      title: "Melhor filme internacional",
-      winner: "Ainda estou aqui.",
-    },
-    {
-      title: "Melhor filme",
-      winner: "Anora",
-    },
-  ];
-  res.json(awards);
-});
+app.use("/actors", actorRoutes);
+app.use("/directors", directorRoutes);
+app.use("/movies", movieRoutes);
 
 const port = 8000;
 app.listen(port, (error) => {
