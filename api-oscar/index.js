@@ -1,19 +1,22 @@
 import express from "express";
-import awardRoutes from "./routes/awardRoutes.js"
-import actorRoutes from "./routes/actorRoutes.js"
-import directorRoutes from "./routes/directorRoutes.js"
-import movieRoutes from "./routes/movieRoutes.js"
-
+import awardRoutes from "./routes/awardRoutes.js";
+import actorRoutes from "./routes/actorRoutes.js";
+import directorRoutes from "./routes/directorRoutes.js";
+import movieRoutes from "./routes/movieRoutes.js";
 import mongoose from './config/db-connection.js';
+import { setupSwagger } from './config/swagger.js';
 
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
 app.use("/awards", awardRoutes);
 app.use("/actors", actorRoutes);
 app.use("/directors", directorRoutes);
 app.use("/movies", movieRoutes);
+
+setupSwagger(app);
 
 const port = 8000;
 app.listen(port, (error) => {
@@ -21,5 +24,6 @@ app.listen(port, (error) => {
     console.log(error);
   } else {
     console.log(`API rodando em http://localhost:${port}`);
+    console.log(`Swagger disponível em http://localhost:${port}/api-docs`);
   }
 });
