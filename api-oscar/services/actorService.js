@@ -10,12 +10,13 @@ class actorService {
     }
   }
 
-  async create(name, birthdate, movies_ids) {
+  async create(name, birthdate, movies_ids, nominations) {
     try {
       const newActor = new Actor({
         name,
         birthdate,
         movies_ids,
+        nominations,
       });
 
       await newActor.save();
@@ -33,7 +34,7 @@ class actorService {
     }
   }
 
-  async updateActor(id, data) {
+  async update(id, data) {
     try {
       await Actor.findByIdAndUpdate(id, data, { new: true });
       console.log(`Ator com a id: ${id} foi atualizado.`);

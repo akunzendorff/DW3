@@ -10,19 +10,14 @@ class movieService {
     }
   }
 
-  async create(title, description, release_date, director_id, actors_ids) {
+  async create(data) {
     try {
-      const newMovie = new Movie({
-        title,
-        description,
-        release_date,
-        director_id,
-        actors_ids,
-      });
-
+      const newMovie = new Movie(data);
       await newMovie.save();
+      return newMovie; 
     } catch (error) {
       console.log(error);
+      throw error; 
     }
   }
 
@@ -35,7 +30,7 @@ class movieService {
     }
   }
 
-  async updateMovie(id, data) {
+  async update(id, data) {
     try {
       await Movie.findByIdAndUpdate(id, data, { new: true });
       console.log(`Filme com a id: ${id} foi atualizado.`);

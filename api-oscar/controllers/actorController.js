@@ -15,7 +15,7 @@ const createActor = async (req, res) => {
   try {
     const { name, birthdate, movies_ids } = req.body;
     await actorService.create(name, birthdate, movies_ids);
-    res.sendStatus(201);
+    res.status(201).json({ message: "Ator criado com sucesso." });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Erro ao criar ator." });
@@ -44,7 +44,7 @@ const updateActor = async (req, res) => {
     const data = req.body;
 
     if (ObjectId.isValid(id)) {
-      await actorService.updateActor(id, data);
+      await actorService.update(id, data);
       res.status(200).json({ message: "Ator atualizado com sucesso." });
     } else {
       res.status(400).json({ error: "ID inválido." });

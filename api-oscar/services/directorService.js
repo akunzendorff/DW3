@@ -10,12 +10,13 @@ class directorService {
     }
   }
 
-  async create(name, birthdate, movies_ids) {
+  async create(name, birthdate, movies_ids, nominations) {
     try {
       const newDirector = new Director({
         name,
         birthdate,
         movies_ids,
+        nominations,
       });
 
       await newDirector.save();
@@ -33,7 +34,7 @@ class directorService {
     }
   }
 
-  async updateDirector(id, data) {
+  async update(id, data) {
     try {
       await Director.findByIdAndUpdate(id, data, { new: true });
       console.log(`Diretor com a id: ${id} foi atualizado.`);

@@ -12,8 +12,10 @@ const getAllAwards = async (req, res) => {
 
 const createAward = async (req, res) => {
   try {
-    const { title, candidates, winner } = req.body;
-    await awardService.create(title, candidates, winner);
+    const { category, year, nominees, winner } = req.body;
+
+    await awardService.create({ category, year, nominees, winner });
+
     res.status(201).json({ message: "Prêmio criado com sucesso." });
   } catch (error) {
     console.error("Erro ao criar prêmio:", error);
@@ -21,11 +23,10 @@ const createAward = async (req, res) => {
   }
 };
 
+
 const deleteAward = async (req, res) => {
   try {
     const { id } = req.params;
-
-    // Validação opcional do ObjectId
     if (!id || id.length !== 24) {
       return res.status(400).json({ error: "ID inválido." });
     }
@@ -43,7 +44,7 @@ const updateAward = async (req, res) => {
     const { id } = req.params;
     const updateData = req.body;
 
-    const updated = await awardService.updateAward(id, updateData);
+    const updated = await awardService.update(id, updateData);
     res.status(200).json(updated);
   } catch (error) {
     console.error("Erro ao atualizar prêmio:", error);

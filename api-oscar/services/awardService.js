@@ -10,21 +10,18 @@ class awardService {
     }
   }
 
-  async Create(title, candidates, winner) {
+  async create(data) {
     try {
-      const newAward = new Award({
-        title,
-        candidates,
-        winner,
-      });
-
+      const newAward = new Award(data);
       await newAward.save();
+      return newAward;
     } catch (error) {
       console.log(error);
+      throw error;
     }
-  }
+  }  
 
-  async Delete(id) {
+  async delete(id) {
     try {
       await Award.findByIdAndDelete(id);
       console.log(`Prêmio com a id: ${id} foi excluído.`);
@@ -33,7 +30,7 @@ class awardService {
     }
   }
 
-  async updateAward(id, data) {
+  async update(id, data) {
     try {
       await Award.findByIdAndUpdate(id, data, { new: true });
       console.log(`Prêmio com a id: ${id} foi atualiado.`);

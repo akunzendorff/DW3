@@ -15,7 +15,7 @@ const createDirector = async (req, res) => {
   try {
     const { name, birthdate, movies_ids } = req.body;
     await directorService.create(name, birthdate, movies_ids);
-    res.sendStatus(201);
+    res.status(201).json({ message: "Diretor criado com sucesso." });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Erro ao criar diretor." });
@@ -44,7 +44,7 @@ const updateDirector = async (req, res) => {
     const data = req.body;
 
     if (ObjectId.isValid(id)) {
-      await directorService.updateDirector(id, data);
+      await directorService.update(id, data);
       res.status(200).json({ message: "Diretor atualizado com sucesso." });
     } else {
       res.status(400).json({ error: "ID inválido." });
