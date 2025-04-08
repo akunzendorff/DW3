@@ -98,6 +98,40 @@
 
 /**
  * @swagger
+ * /awards/update/{id}:
+ *   put:
+ *     summary: Atualiza um prêmio por ID
+ *     tags: [Awards]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: ID do prêmio a ser atualizado
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Award'
+ *     responses:
+ *       200:
+ *         description: Prêmio atualizado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Award'
+ *       400:
+ *         description: ID inválido ou dados mal formatados
+ *       404:
+ *         description: Prêmio não encontrado
+ *       500:
+ *         description: Erro interno do servidor
+ */
+
+/**
+ * @swagger
  * /awards/delete/{id}:
  *   delete:
  *     summary: Deleta um prêmio por ID

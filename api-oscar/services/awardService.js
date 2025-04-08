@@ -32,12 +32,14 @@ class awardService {
 
   async update(id, data) {
     try {
-      await Award.findByIdAndUpdate(id, data, { new: true });
-      console.log(`Prêmio com a id: ${id} foi atualiado.`);
+      const updatedAward = await Award.findByIdAndUpdate(id, data, { new: true });
+      console.log(`Prêmio com a id: ${id} foi atualizado.`);
+      return updatedAward;
     } catch (error) {
       console.log(error);
+      throw error;
     }
-  }
+  }  
 }
 
 export default new awardService();
