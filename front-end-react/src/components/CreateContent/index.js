@@ -27,9 +27,18 @@ const CreateContent = () => {
           rating: rating,
         },
       };
-      console.log(game)
+      console.log(game); // Enviando para a API
+      try {
+        const response = await axios.post(`http://localhost:4000/games/`, game);
+        if (response.status === 201) {
+          alert("O jogo foi criado com sucesso!");
+          Router.push("/home");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     } else {
-      alert("Por favor, preencha todos os campos.")
+      alert("Por favor, preencha todos os campos.");
     }
   };
 
@@ -38,7 +47,7 @@ const CreateContent = () => {
       <div className="title">
         <h2>Cadastrar novo jogo</h2>
       </div>
-      <form id="createForm" className="formPrimary">
+      <form id="createForm" className="formPrimary" onSubmit={handleSubmit}>
         <input
           type="text"
           name="title"
